@@ -23,12 +23,24 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 关闭对模型修改的
 db = SQLAlchemy(app)  # 初始化扩展，传入程序实例 app
 
 
+# 模板上下文处理函数
+@app.context_processor
+def inject_user():  # 函数名可以随意修改
+	user = User.query.first()
+	return dict(user=user)  # 需要返回字典，等同于 return {‘user’：user }
+
+
+# 404 错误处理函数
+@app.errorhandler(404)  # 传入要处理的错误代码
+def page_not_found(e):  # 接受异常对象作为参数
+	return render_template('404.html'), 404  # 返回模板和状态码
+
+
 # 返回渲染好的模板作为响应
 @app.route('/')
 def index():
-	user = User.query.first()
 	movies = Movie.query.all()
-	return render_template('index.html', name=user, movies=movies)
+	return render_template('index.html', movies=movies)
 
 
 # 创建数据库模型
@@ -84,7 +96,6 @@ def forge():
 	for m in movies:
 		movie = Movie(title=m['title'], year=m['year'])
 		db.session.add(movie)
-		
+	
 	db.session.commit()
 	click.echo('Done.')
-	
