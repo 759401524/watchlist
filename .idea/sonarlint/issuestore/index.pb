@@ -492,3 +492,9 @@ B
 templates/404.html,6\8\68a8bfc84a821a32ae5ba7dad3051cb12d1529b3
 C
 templates/base.html,d\a\da7c237b85a69c00a9ab8c189bf63e22070fcac3
+C
+templates/edit.html,f\a\fa462efe7320cd0e706ed38738c1d50b191c6643
+D
+templates/login.html,f\f\ffdb36cd67c5e5e09ba8e92b13a1dc029c7c4627
+G
+templates/settings.html,0\d\0dec69dd01a66a4fe0037d0d54788cf1d41463f8
